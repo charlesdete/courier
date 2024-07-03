@@ -2,7 +2,7 @@
 include 'header.php';
 
 if(!isset($_SESSION['Email'])){
-    header ('location:login.php'); 
+    header ('location:index.php'); 
 }
 
 
@@ -62,6 +62,13 @@ if(!isset($_SESSION['Email'])){
 
   <br>
   <p>
+  <select class="form-select" name="package_status" aria-label="Default select example">
+  <option value="good state" >Good state</option>
+  <option value="broken" >Broken</option>
+  <option value="bad state" >Bad state</option>
+
+  </select>
+  <p>
   <select class="form-select" name="delivery_status" aria-label="Default select example">
   <option value="Pending" >Pending</option>
   <option value="In Transit" >In Transit</option>
@@ -102,11 +109,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = mysqli_real_escape_string($conn, $_POST['courier_id']);
     $name = mysqli_real_escape_string($conn, $_POST['customer_name']);
     $address = mysqli_real_escape_string($conn, $_POST['customer_address']);
+    $package =  mysqli_real_escape_string($conn, $_POST['package_status']);
     $status = mysqli_real_escape_string($conn, $_POST['delivery_status']);
     $track = mysqli_real_escape_string($conn, $_POST['tracking_id']);
 
-    $sql = "INSERT INTO deliveries (courier_id, customer_name, customer_address, delivery_status, tracking_id)
-            VALUES ($id ,'$name','$address','$status','$track')";
+    $sql = "INSERT INTO deliveries (courier_id, customer_name, customer_address, package_status, delivery_status, tracking_id)
+            VALUES ($id ,'$name','$address','$package','$status','$track')";
 
     $query = mysqli_query($conn,$sql);
 

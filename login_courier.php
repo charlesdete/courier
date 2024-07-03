@@ -5,20 +5,70 @@ include 'header.php';
 <!DOCTYPE html>
 <html>
     <head> 
-        <title>SIGN IN  HERE! </title>
+        <title>SIGN IN  COURIER! </title>
         <link rel="stylesheet" href="style.css">
     </head>
 <body>
- 
+ <div id class="login">       
+        
+ <div class="card2">
+ <form action=" <?php echo
+    htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
+      <div class="card-header">
+      <h2>Sign in Courier!</h2>
+    </div>
+         
+         <div class="form-group ">
+             
+               <input type="text" name="Name" placeholder="Name" class="input-style"></br>
+               
+               <input type="email" name="Email" placeholder="Email" class="input-style">
+                
+               <input type="password" name="Password"placeholder="Password" class="input-style">
+               <br/>
+        
+               </br>
+            
+               <button type="submit" name="loginbtn"  class="button">Login
+               </button>
+            
+            </div>
+          </form> 
+         </div> 
+      </div> 
+      
+      
+    </body>
+     
+</html>
 
 <?php
 
 
 
-if(isset($_POST['loginbtn'])){
+if($_SERVER['REQUEST_METHOD'] ==='POST'){
 
    
-include 'dbh.class.php';
+
+//database connection
+$servername = "localhost";
+$dbname = "courier";
+$dbusername = "charlie";
+$dbpassword = "root123@";
+
+
+ 
+$conn =mysqli_connect($servername,$dbusername,$dbpassword,$dbname);
+
+//check connection
+if(!$conn){
+    die("connection failed:" .mysqli_connect_error());
+}
+
+
+// define variables and set to empty values
+ $emailErr =  $passwordErr =  "";
+ $email =  $password = "";
 
 
 
@@ -78,7 +128,7 @@ include 'dbh.class.php';
     $result=mysqli_fetch_assoc($query);
             
             
-    if ($result['Role'] == 0 ||$result['Role'] == 1 ) {
+    if ($result['Role'] == 1 ) {
                 // User with provided email found, verify password
                 $hashedPassword = $result['Password'];
                
@@ -93,7 +143,7 @@ include 'dbh.class.php';
                         
                         // set session
                         $_SESSION['Email'] = $email;
-                        $role= $result['Role'];
+                        $role= $result['Role'] == 1;
                         $_SESSION['Role']=$role;
                         
 
@@ -110,7 +160,7 @@ include 'dbh.class.php';
 
 
                     // redirect logged in user to homepage
-                     header('Location:home.php');
+                     header('Location:courier_index.php');
                 } else {
                     echo "Invalid password";
                     // header('Location:login.php?error=Wrong credentials');
@@ -118,7 +168,7 @@ include 'dbh.class.php';
                 
             } else {
             
-                header('Location:login.php?error=Role is invalid');
+                header('Location:login_courier.php?error=Role is invalid');
             }
             // No user with provided email found
         

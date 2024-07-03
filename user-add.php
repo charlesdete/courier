@@ -2,7 +2,7 @@
 include 'header.php';
 
 if(!isset($_SESSION['Email'])){
-    header ('location:login.php'); 
+    header ('location:index.php'); 
 }
 
 ?>

@@ -3,7 +3,7 @@ include 'header.php';
 
 
 if(!isset($_SESSION['Email'])){
-    header ('location:login.php'); 
+    header ('location:index.php'); 
 }
 ?>
 <!doctype html>
@@ -24,25 +24,25 @@ if(!isset($_SESSION['Email'])){
       <h2> Add Courier Here!</h2>
     </div>
   <div class="col-md-6">
-    <label for="inputName" class="form-label">Name</label>
-    <input type="Name" name="name"  class="form-control" id="inputName" required>
+
+    <input type="Name" name="name"  class="input-style" placeholder="First Name" required>
   </div>
   <div class="col-md-6">
-    <label for="inputPassword4" class="form-label">Email</label>
-    <input type="email" name="email" class="form-control" id="inputEmail" required>
+
+    <input type="email" name="email" class="input-style" placeholder="Email" required>
   </div>
   <div class="col-12">
-    <label for="inputPhone" class="form-label">Phone</label>
-    <input type="phone" name="phone" class="form-control" id="inputPhone" placeholder="Phone Number" required>
+
+    <input type="phone" name="phone" class="input-style"  placeholder="Phone Number" required>
   </div>
   <div class="col-12">
-    <label for="inputAddress" class="form-label">Address</label>
-    <input type="text" name="address" class="form-control" id="inputAddress" placeholder="Address" required>
+   
+    <input type="text" name="address" class="input-style"  placeholder="Address" required>
   </div>
   <div class="col-md-4">
-    <label for="inputVehicle" class="form-label">Vehicle Type</label>
-    <select id="inputVehicle" name="vehicle_type" class="form-select" required>
-    <option selected>Choose...</option>
+    
+    <select id="inputVehicle" name="vehicle_type" class="input-style" required>
+    <option selected>Choose Vehicle Type...</option>
     <option value="Scooter">Scooter</option>
     <option value="Motorcycle">Motorcycle</option>
     <option value="Van">Van</option>
@@ -53,9 +53,9 @@ if(!isset($_SESSION['Email'])){
   </div>
 
   <div class="col-md-4">
-    <label for="inputState" class="form-label">Status</label>
-    <select id="inputState" name="status" class="form-select" required>
-      <option selected>Choose...</option>
+
+    <select  name="status" class="input-style" required>
+      <option selected>Choose Status...</option>
       <option value="Active">Active</option>
       <option value="Inactive">Inactive</option>
 

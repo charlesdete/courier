@@ -136,15 +136,7 @@ const dropdownList = [...dropdownElementList].map(dropdownToggleEl => new bootst
          <h3>Orders</h3>
          <span class="material-icons-outlined">local_activity</span>
         </div>
-        <h1>
-<?php
-include 'dbh.class.php';
-include 'fetch-count.class.php';
-include 'fetch-count.contr.class.php';
-$order = new fetch_contr();
-$order->show_fetch();
-?>
-       </h1>
+        <h1>1</h1>
       </div>
 
       <div class="card">
@@ -152,17 +144,7 @@ $order->show_fetch();
          <h3>Deliveries</h3>
          <span class="material-icons-outlined">category</span>
         </div>
-        <h1>
-          <?php
-        
-include 'fetch-count-delivery.class.php';
-include 'fetch-count-delivery.contr.php';
-
-$delivery = new fetch_deliveryCount();
-$delivery->show_delivery();
-
-?>
-        </h1>
+        <h1>1</h1>
       </div>
 
       <div class="card">
@@ -170,16 +152,7 @@ $delivery->show_delivery();
          <h3>Couriers</h3>
          <span class="material-icons-outlined">groups</span>
         </div>
-        <h1>
-          <?php
-        include 'fetch-count-courier.class.php';
-include 'fetch-count-courier.contr.php';
-
-$delivery = new fetch_courierCount();
-$delivery->show_courier();
-
-?>
-        </h1>
+        <h1>5</h1>
       </div>
    </div> 
   
@@ -187,60 +160,59 @@ $delivery->show_courier();
   <!-- couriers list -->
   <div class="courier-list">
 
-           <table class="table">
-                <thead>
-                  
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Vehicle</th>
-                    <th scope="col">No.Plates</th>
-                    <th scope="col">Status</th> 
-                  </tr>
-                </thead>
-            <tbody>
+  <table class="table">
+  <thead>
+    
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Vehicle</th>
+      <th scope="col">No.Plates</th>
+      <th scope="col">Status</th> 
+    </tr>
+  </thead>
+  <tbody>
 
-                  <?php
+  <?php
 
-                //database connection
-                $servername = "localhost";
-                $dbname = "courier";
-                $dbusername = "charlie";
-                $dbpassword = "root123@";
+//database connection
+$servername = "localhost";
+$dbname = "courier";
+$dbusername = "charlie";
+$dbpassword = "root123@";
 
 
 
-                $conn =mysqli_connect($servername,$dbusername,$dbpassword,$dbname);
+$conn =mysqli_connect($servername,$dbusername,$dbpassword,$dbname);
 
-                //check connection
-                if(!$conn){
-                die("connection failed:" .mysqli_connect_error());
-                } 
+//check connection
+if(!$conn){
+die("connection failed:" .mysqli_connect_error());
+} 
 
-                $sql = "SELECT * FROM courier_details";
-                $query = mysqli_query($conn,$sql);
-                if($query){
-                while($row=mysqli_fetch_assoc($query)){
-                $id=$row['id'];
-                $name =$row['Name'];
-                $vehicle_type =$row['Vehicle_type'];
-                $number_plate =$row['Number_plate'];
-                $status = $row['Status'];
+$sql = "SELECT * FROM courier_details";
+$query = mysqli_query($conn,$sql);
+if($query){
+while($row=mysqli_fetch_assoc($query)){
+$id=$row['id'];
+$name =$row['Name'];
+$vehicle_type =$row['Vehicle_type'];
+$number_plate =$row['Number_plate'];
+$status = $row['Status'];
 
-                  echo  '<tr>
-                      <th scope="row">'.$id.'</th>
-                      <td>'.$name.'</td>
-                      <td>'.$vehicle_type.'</td>
-                      <td>'.$number_plate.'</td>
-                      <td>'.$status.'</td>
-                    </tr>';
-                }
-                } 
-                ?>     
-           </tbody>
-          </table>
-          </div>
-      </main>
+  echo  '<tr>
+      <th scope="row">'.$id.'</th>
+      <td>'.$name.'</td>
+      <td>'.$vehicle_type.'</td>
+      <td>'.$number_plate.'</td>
+      <td>'.$status.'</td>
+    </tr>';
+}
+} 
+?>     
+  </tbody>
+</table>
+</main>
   </div>
   </div>
 

@@ -1,7 +1,7 @@
 <?php
 session_start();
 if(!isset($_SESSION['Email'])){
-    header ('location:login.php'); 
+    header ('location:index.php'); 
 }
 
 $servername = "localhost";
@@ -37,4 +37,3 @@ if(isset($_GET['id'])){
 
 }
 
-?>

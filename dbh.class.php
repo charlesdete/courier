@@ -1,20 +1,24 @@
 <?php
 class Dbh{
-    protected function connect(){
-       try{
-    // set DB connections configs
-   
-    $username = "charlie";
-    $password = "root123@";
-    $dbh = new PDO('mysql:host=localhost;dbname=courier', $username,$password);
-    return $dbh;  
-} 
-catch (PDOException $e){
-   print "Error!:" .$e->getMessage()."<br/>"; 
-    die(); 
-      }
+ 
+        private $servername;
+        private $username;
+        private $password;
+    
+        private $dbname;
+        
+        protected function connect(){
+    
+          $this->servername = "localhost";
+          $this->username = "charlie";
+          $this->password = "root123@";
+          $this->dbname = "courier";
+        // Create connection
+        $conn = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
+        return $conn;
+        
+        }
     }
-}
+    
 
 
-?>

@@ -1,4 +1,4 @@
-<?php
+<?php 
 include 'header.php';
 
 
@@ -22,9 +22,14 @@ if(!isset($_SESSION['Email'])){
     }
 
 
-    $sql = "SELECT * FROM orders";
-    $query = mysqli_query($conn,$sql);
-    $result = mysqli_fetch_assoc($query);
+    $email = $_SESSION['Email'];  
+
+
+$sql= "SELECT * FROM user where Email = '$email'";
+$query= mysqli_query($conn,$sql);
+$user=mysqli_fetch_assoc($query);
+
+
 ?>
 <!doctype html>
 <html lang="en">
@@ -38,28 +43,52 @@ if(!isset($_SESSION['Email'])){
   <body>
 
   <div class="card-header">
-      <h2> List of Courier Orders</h2>
+      <h2> History of Orders</h2>
     </div>
 
   <table class="table">
   <thead>
     <tr>
       <th scope="col">Id</th>
+      <th scope="col">User Id</th>
       <th scope="col">Sender</th>
       <th scope="col">Recipient</th>
       <th scope="col">Order Date</th>
+      <th scope="col">Assigned Courier</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td><?php echo $result['sender_name']; ?></td>
-      <td><?php echo $result['recipient_name']; ?></td>
-      <td><?php echo $result['order_date']; ?></td>
-    </tr>
-   
-  </tbody>
-</table>
+
+  <?php
+$user_id=$user['id'];
+
+$sql = "SELECT * FROM orders where user_id='$user_id' ";
+$result = mysqli_query($conn,$sql);
+
+if($result){
+    while($row=mysqli_fetch_assoc($result)){
+      $id=$row['order_id'];
+      $user_id=$row['user_id'];
+      $sender_name =$row['sender_name'];
+      $recipient_name=$row['recipient_name'];
+      $date =$row['order_date'];
+      $courier= $row['assigned_courier'];
+
+
+
+
+      echo'<tr>
+      <th scope="row">'.$id.'</th>
+      <td>'.$user_id.'</td>
+      <td>'.$sender_name.'</td>
+       <td>'.$recipient_name.'</td>
+       <td>'.$date.'</td>
+       <td>'.$courier.'</td>
+       
+     </tr>';
+    }
+  }
+   ?>
 
 
   </body>

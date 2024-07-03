@@ -7,20 +7,12 @@ include 'header.php';
     <head> 
         <title>SIGN UP HERE! </title>
         <link rel="stylesheet" href="style.css">
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     </head>
 <body>
- <div id class="login">
-    <div class="alert">
-        <?php 
-        if(isset($_SESSION['status']))
-        {
-          echo"<h4>".$_SESSION['status']."</h4>";  
-          unset($_SESSION['status']);
-        }
-        ?>
+ 
         
-        
- <div class="card2">
+ <div class="registration">
  <form action=" <?php echo
     htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST">
       <div class="card-header">
@@ -28,14 +20,37 @@ include 'header.php';
     </div>
          
          <div class="form-group ">
-             
-               <input type="text" name="Name" placeholder="Name" class="input-style"></br>
-               
-               <input type="email" name="Email" placeholder="Email" class="input-style">
+         <div class="row">
+  <div class="col">
+    <input type="text" class="form-control" name="Name" placeholder="Name" aria-label="First name">
+  </div>
+  
+  <div class="col">
+    <input type="text" class="form-control" name="Email" placeholder="Email" aria-label="Last name">
+  </div>
+</div>
+<br/>
+<div class="col-12">
+    
+    <input type="phone" class="form-control" id="phone" name="Phone" placeholder="Phone Number">
+  </div>
+  <br/>
+  <div class="col-12">
+    
+    <input type="password" class="form-control" id="password" name="Password" placeholder="Password">
+  </div>    <br/>          
+      
+  <div class="col-sm-3">
+    <label class="visually-hidden" for="specificSizeSelect">Preference</label>
+    <select class="form-select" name="Role" id="specificSizeSelect">
+      <option selected>Role..</option>
+      <option value="1">Courier</option>
+      <option value="0">Customer</option>
+    
+    </select>
+</div>
                 
-               <input type="int" name="Phone"placeholder="phone number" class="input-style">
-                
-               <input type="password" name="Password"placeholder="Password" class="input-style">
+
                <br/>
         
                </br>
@@ -87,6 +102,7 @@ $email=validate($_POST['Email']);
 $phone =validate($_POST['Phone']);
 $password=validate($_POST['Password']);
 $confirm_password=validate($_POST['Password']);
+$role =validate($_POST['Role']);
 
 
 //requiring the inputs
@@ -159,13 +175,13 @@ if ($password === $confirm_password) {
 $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
 
 
-$sql="INSERT INTO user (Name,Email,Phone,Password) VALUES ('$name','$email','$phone','$hashedpassword')";
+$sql="INSERT INTO user (Name,Email,Phone,Password,Role) VALUES ('$name','$email','$phone','$hashedpassword','$role')";
 $query=mysqli_query($conn,$sql);
 
 
 if($query > 0){
 
-  header('location:login.php');
+  header('location:index.php');
   die();
 }
 

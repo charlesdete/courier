@@ -39,7 +39,7 @@ if(!$conn){
                    
                     
                     //running conditions based on the pages being accessed
-                    if(isset($_SESSION['Email'])){
+                    if(isset($_SESSION['Role']) == 0 ){
                   //if the session is not set show login 
                   ?>
                      
@@ -49,7 +49,20 @@ if(!$conn){
                     <li><a href="logout.php"><i class="uil uil-sign-out-alt"></i>LOGOUT</a></li>
                   <?php
 
-                    }else{
+                    }elseif (isset($_SESSION['Role']) == 1  ) {
+                       //if the session is not set show login 
+                  ?>
+                     
+                  <li><a href="courier_index.php">COURIER</a></li>
+                  <li><a href="courier_details.php">DETAILS</a></li>
+                  <li><a href="courier-home.php">DASHBOARD</a></li>
+                  <li><a href="logout.php"><i class="uil uil-sign-out-alt"></i>LOGOUT</a></li>
+                <?php
+
+                    } 
+                    
+                    
+                    else{
                       ?>
                       <li><a href="login.php"><i class="uil uil-sign-in-alt"></i>LOGIN</a></li> 
                    <li><a href="registration.php">REGISTER</a></li>
@@ -57,14 +70,11 @@ if(!$conn){
                        <?php 
 
                     }?>
-
-                     
-           
-             
-          
-            
-              
              <!-- <li><a href="cart.php">ADD CART</a></li> --> 
             </ul> 
+
+           
            </div>
          </div>
+
+         
